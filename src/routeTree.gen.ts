@@ -10,33 +10,128 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as HandoverRouteImport } from './routes/handover'
+import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as ActivitiesIndexRouteImport } from './routes/activities/index'
+import { Route as ActivitiesActivityIdRouteImport } from './routes/activities/$activityId'
+import { Route as ActivitiesNewRouteImport } from './routes/activities/new'
+import { Route as PersonnelIndexRouteImport } from './routes/personnel/index'
+import { Route as PersonnelPersonnelIdRouteImport } from './routes/personnel/$personnelId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HandoverRoute = HandoverRouteImport.update({
+  id: '/handover',
+  path: '/handover',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActivitiesIndexRoute = ActivitiesIndexRouteImport.update({
+  id: '/activities/',
+  path: '/activities/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActivitiesActivityIdRoute = ActivitiesActivityIdRouteImport.update({
+  id: '/activities/$activityId',
+  path: '/activities/$activityId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActivitiesNewRoute = ActivitiesNewRouteImport.update({
+  id: '/activities/new',
+  path: '/activities/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PersonnelIndexRoute = PersonnelIndexRouteImport.update({
+  id: '/personnel/',
+  path: '/personnel/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PersonnelPersonnelIdRoute = PersonnelPersonnelIdRouteImport.update({
+  id: '/personnel/$personnelId',
+  path: '/personnel/$personnelId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/handover': typeof HandoverRoute
+  '/reports': typeof ReportsRoute
+  '/activities/$activityId': typeof ActivitiesActivityIdRoute
+  '/activities/new': typeof ActivitiesNewRoute
+  '/personnel/$personnelId': typeof PersonnelPersonnelIdRoute
+  '/activities/': typeof ActivitiesIndexRoute
+  '/personnel/': typeof PersonnelIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/handover': typeof HandoverRoute
+  '/reports': typeof ReportsRoute
+  '/activities/$activityId': typeof ActivitiesActivityIdRoute
+  '/activities/new': typeof ActivitiesNewRoute
+  '/personnel/$personnelId': typeof PersonnelPersonnelIdRoute
+  '/activities': typeof ActivitiesIndexRoute
+  '/personnel': typeof PersonnelIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/handover': typeof HandoverRoute
+  '/reports': typeof ReportsRoute
+  '/activities/$activityId': typeof ActivitiesActivityIdRoute
+  '/activities/new': typeof ActivitiesNewRoute
+  '/personnel/$personnelId': typeof PersonnelPersonnelIdRoute
+  '/activities/': typeof ActivitiesIndexRoute
+  '/personnel/': typeof PersonnelIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/handover'
+    | '/reports'
+    | '/activities/$activityId'
+    | '/activities/new'
+    | '/personnel/$personnelId'
+    | '/activities/'
+    | '/personnel/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/handover'
+    | '/reports'
+    | '/activities/$activityId'
+    | '/activities/new'
+    | '/personnel/$personnelId'
+    | '/activities'
+    | '/personnel'
+  id:
+    | '__root__'
+    | '/'
+    | '/handover'
+    | '/reports'
+    | '/activities/$activityId'
+    | '/activities/new'
+    | '/personnel/$personnelId'
+    | '/activities/'
+    | '/personnel/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  HandoverRoute: typeof HandoverRoute
+  ReportsRoute: typeof ReportsRoute
+  ActivitiesActivityIdRoute: typeof ActivitiesActivityIdRoute
+  ActivitiesNewRoute: typeof ActivitiesNewRoute
+  PersonnelPersonnelIdRoute: typeof PersonnelPersonnelIdRoute
+  ActivitiesIndexRoute: typeof ActivitiesIndexRoute
+  PersonnelIndexRoute: typeof PersonnelIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +143,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/handover': {
+      id: '/handover'
+      path: '/handover'
+      fullPath: '/handover'
+      preLoaderRoute: typeof HandoverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/activities/': {
+      id: '/activities/'
+      path: '/activities'
+      fullPath: '/activities/'
+      preLoaderRoute: typeof ActivitiesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/activities/$activityId': {
+      id: '/activities/$activityId'
+      path: '/activities/$activityId'
+      fullPath: '/activities/$activityId'
+      preLoaderRoute: typeof ActivitiesActivityIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/activities/new': {
+      id: '/activities/new'
+      path: '/activities/new'
+      fullPath: '/activities/new'
+      preLoaderRoute: typeof ActivitiesNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/personnel/': {
+      id: '/personnel/'
+      path: '/personnel'
+      fullPath: '/personnel/'
+      preLoaderRoute: typeof PersonnelIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/personnel/$personnelId': {
+      id: '/personnel/$personnelId'
+      path: '/personnel/$personnelId'
+      fullPath: '/personnel/$personnelId'
+      preLoaderRoute: typeof PersonnelPersonnelIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  HandoverRoute: HandoverRoute,
+  ReportsRoute: ReportsRoute,
+  ActivitiesActivityIdRoute: ActivitiesActivityIdRoute,
+  ActivitiesNewRoute: ActivitiesNewRoute,
+  PersonnelPersonnelIdRoute: PersonnelPersonnelIdRoute,
+  ActivitiesIndexRoute: ActivitiesIndexRoute,
+  PersonnelIndexRoute: PersonnelIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -6,12 +6,18 @@ export function Panel({
   children,
   className,
   solid = false,
+  id,
 }: {
   children: ReactNode;
   className?: string;
   solid?: boolean;
+  id?: string;
 }) {
-  return <div className={cn(solid ? "panel-solid" : "panel", className)}>{children}</div>;
+  return (
+    <div id={id} className={cn(solid ? "panel-solid" : "panel", className)}>
+      {children}
+    </div>
+  );
 }
 
 export function PanelHeader({
