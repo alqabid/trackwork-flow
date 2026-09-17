@@ -15,6 +15,7 @@ import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as ActivitiesIndexRouteImport } from './routes/activities/index'
 import { Route as ActivitiesActivityIdRouteImport } from './routes/activities/$activityId'
 import { Route as ActivitiesNewRouteImport } from './routes/activities/new'
+import { Route as PersonnelIndexRouteImport } from './routes/personnel/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +47,11 @@ const ActivitiesNewRoute = ActivitiesNewRouteImport.update({
   path: '/activities/new',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PersonnelIndexRoute = PersonnelIndexRouteImport.update({
+  id: '/personnel/',
+  path: '/personnel/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/activities/$activityId': typeof ActivitiesActivityIdRoute
   '/activities/new': typeof ActivitiesNewRoute
   '/activities/': typeof ActivitiesIndexRoute
+  '/personnel/': typeof PersonnelIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/activities/$activityId': typeof ActivitiesActivityIdRoute
   '/activities/new': typeof ActivitiesNewRoute
   '/activities': typeof ActivitiesIndexRoute
+  '/personnel': typeof PersonnelIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,6 +79,7 @@ export interface FileRoutesById {
   '/activities/$activityId': typeof ActivitiesActivityIdRoute
   '/activities/new': typeof ActivitiesNewRoute
   '/activities/': typeof ActivitiesIndexRoute
+  '/personnel/': typeof PersonnelIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,6 +90,7 @@ export interface FileRouteTypes {
     | '/activities/$activityId'
     | '/activities/new'
     | '/activities/'
+    | '/personnel/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -89,6 +99,7 @@ export interface FileRouteTypes {
     | '/activities/$activityId'
     | '/activities/new'
     | '/activities'
+    | '/personnel'
   id:
     | '__root__'
     | '/'
@@ -97,6 +108,7 @@ export interface FileRouteTypes {
     | '/activities/$activityId'
     | '/activities/new'
     | '/activities/'
+    | '/personnel/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -106,6 +118,7 @@ export interface RootRouteChildren {
   ActivitiesActivityIdRoute: typeof ActivitiesActivityIdRoute
   ActivitiesNewRoute: typeof ActivitiesNewRoute
   ActivitiesIndexRoute: typeof ActivitiesIndexRoute
+  PersonnelIndexRoute: typeof PersonnelIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -152,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ActivitiesNewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/personnel/': {
+      id: '/personnel/'
+      path: '/personnel'
+      fullPath: '/personnel/'
+      preLoaderRoute: typeof PersonnelIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -162,6 +182,7 @@ const rootRouteChildren: RootRouteChildren = {
   ActivitiesActivityIdRoute: ActivitiesActivityIdRoute,
   ActivitiesNewRoute: ActivitiesNewRoute,
   ActivitiesIndexRoute: ActivitiesIndexRoute,
+  PersonnelIndexRoute: PersonnelIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
