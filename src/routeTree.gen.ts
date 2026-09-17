@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as HandoverRouteImport } from './routes/handover'
 import { Route as ActivitiesIndexRouteImport } from './routes/activities/index'
 import { Route as ActivitiesActivityIdRouteImport } from './routes/activities/$activityId'
 import { Route as ActivitiesNewRouteImport } from './routes/activities/new'
@@ -17,6 +18,11 @@ import { Route as ActivitiesNewRouteImport } from './routes/activities/new'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HandoverRoute = HandoverRouteImport.update({
+  id: '/handover',
+  path: '/handover',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ActivitiesIndexRoute = ActivitiesIndexRouteImport.update({
@@ -37,12 +43,14 @@ const ActivitiesNewRoute = ActivitiesNewRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/handover': typeof HandoverRoute
   '/activities/$activityId': typeof ActivitiesActivityIdRoute
   '/activities/new': typeof ActivitiesNewRoute
   '/activities/': typeof ActivitiesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/handover': typeof HandoverRoute
   '/activities/$activityId': typeof ActivitiesActivityIdRoute
   '/activities/new': typeof ActivitiesNewRoute
   '/activities': typeof ActivitiesIndexRoute
@@ -50,6 +58,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/handover': typeof HandoverRoute
   '/activities/$activityId': typeof ActivitiesActivityIdRoute
   '/activities/new': typeof ActivitiesNewRoute
   '/activities/': typeof ActivitiesIndexRoute
@@ -57,12 +66,22 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/activities/$activityId' | '/activities/new' | '/activities/'
+    | '/'
+    | '/handover'
+    | '/activities/$activityId'
+    | '/activities/new'
+    | '/activities/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/activities/$activityId' | '/activities/new' | '/activities'
+  to:
+    | '/'
+    | '/handover'
+    | '/activities/$activityId'
+    | '/activities/new'
+    | '/activities'
   id:
     | '__root__'
     | '/'
+    | '/handover'
     | '/activities/$activityId'
     | '/activities/new'
     | '/activities/'
@@ -70,6 +89,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  HandoverRoute: typeof HandoverRoute
   ActivitiesActivityIdRoute: typeof ActivitiesActivityIdRoute
   ActivitiesNewRoute: typeof ActivitiesNewRoute
   ActivitiesIndexRoute: typeof ActivitiesIndexRoute
@@ -82,6 +102,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/handover': {
+      id: '/handover'
+      path: '/handover'
+      fullPath: '/handover'
+      preLoaderRoute: typeof HandoverRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/activities/': {
@@ -110,6 +137,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  HandoverRoute: HandoverRoute,
   ActivitiesActivityIdRoute: ActivitiesActivityIdRoute,
   ActivitiesNewRoute: ActivitiesNewRoute,
   ActivitiesIndexRoute: ActivitiesIndexRoute,
